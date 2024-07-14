@@ -24,8 +24,10 @@ public class UserLoginTest {
     Javalin app;
 
     /**
-     * Before every test, reset the database, restart the Javalin app, and create a new webClient and ObjectMapper
+     * Before every test, reset the database, restart the Javalin app, and create a
+     * new webClient and ObjectMapper
      * for interacting locally on the web.
+     * 
      * @throws InterruptedException
      */
     @Before
@@ -45,11 +47,12 @@ public class UserLoginTest {
     }
 
     /**
-     * Sending an http request to POST localhost:8080/login with valid username and password
+     * Sending an http request to POST localhost:8080/login with valid username and
+     * password
      * 
      * Expected Response:
-     *  Status Code: 200
-     *  Response Body: JSON representation of user object
+     * Status Code: 200
+     * Response Body: JSON representation of user object
      */
     @Test
     public void loginSuccessful() throws IOException, InterruptedException {
@@ -67,7 +70,7 @@ public class UserLoginTest {
         ObjectMapper om = new ObjectMapper();
         Account expectedResult = new Account(1, "testuser1", "password");
         Account actualResult = om.readValue(response.body().toString(), Account.class);
-        Assert.assertEquals(expectedResult, actualResult);        
+        Assert.assertEquals(expectedResult, actualResult);
 
     }
 
@@ -75,8 +78,8 @@ public class UserLoginTest {
      * Sending an http request to POST localhost:8080/login with invalid username
      * 
      * Expected Response:
-     *  Status Code: 401
-     *  Response Body: 
+     * Status Code: 401
+     * Response Body:
      */
     @Test
     public void loginInvalidUsername() throws IOException, InterruptedException {
@@ -94,14 +97,13 @@ public class UserLoginTest {
         Assert.assertEquals("", response.body().toString());
 
     }
-    
 
     /**
      * Sending an http request to POST localhost:8080/login with invalid password
      * 
      * Expected Response:
-     *  Status Code: 401
-     *  Response Body: 
+     * Status Code: 401
+     * Response Body:
      */
     @Test
     public void loginInvalidPassword() throws IOException, InterruptedException {
